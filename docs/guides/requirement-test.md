@@ -13,7 +13,9 @@ verification kinds, identified by its requirement ID.
 2. Write the automated test, see it fail for the right reason, then build.
 3. Tag it. Pytest uses `req` markers; other runners associate their test
    names with the requirement IDs in test metadata. Results identify the
-   ID, verification kind and any named verification part.
+   ID, verification kind and any named verification part. Reuse the
+   runner's standard reports (for example JUnit XML); add only metadata
+   needed to associate results. Do not build a custom reporting framework.
 
 ```python
 @pytest.mark.req("AUTH-CODE-004")
@@ -33,8 +35,20 @@ async def test_resend_within_60_seconds_sends_nothing(sender, clock, outbox) -> 
 - Synthetic data only (NFR-010).
 - Name separately verified parts, including those due in later stages.
   Requirements covering a growing set are checked as members are added.
-- Automated verification counts only executed, passing tests, not
-  collection, skips, expected failures or a green job alone.
-- Owner-run checks are recorded as described in the workflow runbook,
-  with their ID or exit criterion and evidence.
+- Keep only the inventory needed for named parts, due stages, deferred
+  work and owner-run inspections that cannot be derived from the spec,
+  roadmap and approved plan. Check every due ID, kind and part, including
+  earlier-stage deferred parts and growing sets.
+- Every required test must execute and pass. Missing reports, uncollected
+  tests, skips, expected failures and failures cannot satisfy verification,
+  even if another test for the same ID passes. Unknown IDs fail the check.
+- CI enforces the automated parts on the final slice, exact completion
+  revision and completion or correction tag, through the aggregate gate.
+  Configuration checks are automated unless the approved plan assigns a
+  part as an owner-run deployment inspection.
+- Record owner-run checks in the stage issue with ID, named part or exit
+  criterion, result, revision/artifact, environment and evidence. The owner
+  confirms completeness and validity before tagging. Missing, skipped or
+  failed required owner-run checks block tagging and completion; CI does
+  not ingest or validate their records.
 - Never skip or weaken a tagged test to turn CI green.

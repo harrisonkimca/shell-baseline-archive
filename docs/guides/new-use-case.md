@@ -18,6 +18,7 @@ class DisableUserHandler:
         async with self._uow as uow:
             user = await uow.users.get(cmd.user_id)  # raises NotFound
             user.disable(at=self._clock.now())
+            uow.devices.remove_all(user.id)
             uow.tasks.add(DisableIdentity(user.id))
             uow.audit.record(actor, "user.disable", target=user.id)
             await uow.commit()

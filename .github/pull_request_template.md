@@ -13,14 +13,14 @@ Approved stage plan: #<issue>
 
 - [ ] Requirements and parts due in this slice pass their applicable
       Verification in docs/spec/auth.md
-- [ ] Applicable CI checks pass
+- [ ] Aggregate CI gate covers and passes every applicable check, including new checks
 - [ ] Remaining work is assigned in the approved stage plan
 - [ ] Last slice only: every stage exit criterion due now passes
 
 ## Owner-run checks
 
 <!-- Applicable spikes, hands-on checks, load tests and deployment checks:
-     result and evidence, or a link to the record in the stage issue.
+     link to the result and evidence recorded in the stage issue.
      None: write "None." -->
 
 ## Gate changes
@@ -30,6 +30,6 @@ Approved stage plan: #<issue>
 
 ## Done
 
-- [ ] CI green on the latest revision
+- [ ] Aggregate CI and all required verification pass on the latest revision
 - [ ] Review findings resolved
 - [ ] Any weakening approved by the owner

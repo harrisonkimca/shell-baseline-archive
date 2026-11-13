@@ -24,7 +24,9 @@ Check:
 5. Gates and protected files: AGENTS.md's change boundaries are respected.
    Compare effective checks with `main`, not just their configuration.
    Undeclared or unapproved weakening is a blocker.
-6. Completion: applicable CI checks pass on the latest revision. On
+6. Completion: the aggregate CI gate covers every applicable check, including
+   new ones, and each ran and passed on the latest revision. Missing,
+   skipped or failed required checks and verification block completion. On
    `stage-N/exit`, review the whole stage's cumulative verification,
    including earlier slices and deferred parts due now. Every exit
    criterion must pass.

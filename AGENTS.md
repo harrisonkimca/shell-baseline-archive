@@ -5,7 +5,8 @@ Its only normative design files are [README.md](README.md),
 [docs/architecture.md](docs/architecture.md),
 [docs/spec/auth.md](docs/spec/auth.md), [docs/roadmap.md](docs/roadmap.md)
 and [docs/decisions.md](docs/decisions.md); where anything else disagrees,
-they win.
+they win. Files under `docs/evidence/` are historical records, not active
+design requirements, completion evidence or mandatory agent reading.
 
 ## Rules
 
@@ -21,7 +22,7 @@ they win.
 - Imports follow [arch §14](docs/architecture.md#14-import-rules),
   errors [arch §10](docs/architecture.md#10-error-model). No secrets in code.
 - Push implementation branches and open pull requests. Never merge,
-  change repository rules, create completion tags or update CHANGELOG.md.
+  change repository rules, create completion or correction tags.
 - Plan and build the simplest solution that satisfies the
   requirements. Prefer existing tools and direct solutions.
   Add abstractions, dependencies and mechanisms only when
@@ -32,16 +33,18 @@ they win.
 
 | Group | Files | You |
 |---|---|---|
-| Design and agent rules | `README.md`, `docs/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `CHANGELOG.md` | Never edit, except the guide below. Report any needed change to the owner. |
+| Design and agent rules | `README.md`, `docs/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/` | Never edit, except the guide below. Report any needed change to the owner. |
 | Repository governance | `.github/` apart from `.github/workflows/` | Never edit. |
 | Gates | `.github/workflows/`; `.pre-commit-config.yaml`; tool and test settings in `pyproject.toml`; quality-gate and requirement-trace scripts, inventories and tests; scanner configuration; dependency, tool and action pins | Build and extend as the stage requires. |
-| Fork guide | `docs/guides/adding-a-feature.md` | Build in stage 7 and maintain with its tested example. |
+| Fork guide | `docs/guides/adding-a-feature.md` | Build in stage 6 and maintain with its tested example. |
 | Everything else | Code, tests, configuration, routine lockfile updates | As the stage requires. |
 
 ## Gate changes
 
 - Add each CI check in the slice that makes it runnable. No check passes
-  without testing something.
+  without testing something. Every applicable check, including a new one,
+  must be covered by the aggregate required CI gate; missing, skipped or
+  failed required checks fail it.
 - List every gate change in the pull request, with its reason.
 - Any weakening of coverage or enforcement, including through code or
   test changes, needs explicit owner approval. Green CI is not approval.
