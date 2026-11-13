@@ -21,8 +21,9 @@ takes two pull requests:
 
 - A context migrates only its own tables.
 - Key users by Shell's UUID; store no address and no personal field outside
-  AUTH-PRIVACY-002's list.
-- Rows tied to a user cascade or set null on deletion (AUTH-ACCT-009).
+  AUTH-PRIVACY-008's list.
+- Deactivation retains account rows; forks define lawful deletion and
+  retention before launch wherever applicable (spec §15).
 - Only features managed PostgreSQL supports: no superuser, no unmanaged
   extensions.
 - Grant `shell_app` only what it needs; `audit_log` stays insert and read
